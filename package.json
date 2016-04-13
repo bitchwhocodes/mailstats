@@ -15,6 +15,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "node-outlook": "^1.1.5",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "simple-oauth2": "^0.6.0"
   }
 }
