@@ -22,7 +22,10 @@ router.get('/', function(req, res, next) {
 
 function checkForCoookie(){
     var cookie = ['node-tutorial-token'];
-    var hasCookie = cookie!=null && cookie.length;
+    console.log(cookie);
+    
+    var hasCookie = cookie!=null && cookie.length>1;
+    console.log(hasCookie)
     return hasCookie;
     
 }
