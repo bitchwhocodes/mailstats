@@ -5,11 +5,27 @@ var router = express.Router();
 var auth = require('../auth/authHelper');
 
 router.get('/', function(req, res, next) {
+    
+  if(checkForCoookie()){
+      // we could redirect or put in a template
+      res.redirect("/mail");
+  }else{
+      //TODO Replace this with a jade template
   console.log("Request handler 'home' was called.");
   res.setHeader("Content-Type", "text/html");
+  
   res.write('<p>Please <a href="' + auth.getAuthUrl() + '">sign in</a> with your Office 365 or Outlook.com account.</p>');
-  res.end();
+  res.end(); 
+  }
+  
 });
+
+function checkForCoookie(){
+    var cookie = ['node-tutorial-token'];
+    var hasCookie = cookie!=null && cookie.length;
+    return hasCookie;
+    
+}
 
 
 
