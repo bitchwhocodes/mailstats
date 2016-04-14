@@ -5,38 +5,90 @@ body {
 
   
 }
+.centerbae{
+    
+    margin-right: auto; 
+    margin-left: auto; 
+    width: 481px;
+    position:relative;
+    margin-top:-165px;
+}
 html{
  background-color:black;
     height:100%;
 }
-
-h1{
+.baetitle{
     color:#ffffff;
     font-size:72px;
+    width:100%;
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:20px;
 }
+
 
 a {
   color: #00B7FF;
 }
-
+.main{
+    
+    position: relative;
+    z-index: 10;
+}
 .baebackground{
-    background-image: url('../images/baebackground.png');
-    width:744px;
-    height:800px;
+    background-image: url('../images/baebg2.png');
+    width:481px;
+    height:488px;
     float:left;
     display:block;
     position:relative;
 }
 
 .baehead{
-    background-image: url('../images/baehead.png');
-    width:346px;
-    height:332px;
+    background-image: url('../images/baehead2.png');
+    width:191px;
+    height:181px;
     float:left;
     display:block;
     position: absolute;
-    top: 321px;
-    left: 237px;
+    top: 100px;
+    left: 155px;
 }
+
+.cta{
+    position:relative;
+    float:left;
+    width:100%;
+        margin-top: -92px;
+}
+
+.cta a{
+  background-color: #1f818a;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 5px solid #ffffff;
+  padding: 15px;
+  display:block;
+  width:100px;
+  margin-right: auto; 
+  margin-left: auto;
+  text-align:center;
+  font-family: "industry";
+  text-decoration:none;
+  color:#ffffff;
+  
+    
+}
+h3{
+    color:#ffffff;
+    font-size:24px;
+    font-family: "industry";
+    width:100%;
+    text-align:center;
+    margin-bottom:50px;
+    
+}
+
+
 
 
