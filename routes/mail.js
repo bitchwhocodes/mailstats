@@ -6,11 +6,12 @@ var outlook = require("node-outlook");
 var token,email;
  var count = 0;
 var messages = [];
+var baeFinder = require('../baefinder/bae');
 
 router.get('/', function(request, response, next) {
    
     token = getValueFromCookie('node-tutorial-token', request.headers.cookie);
-    console.log("Token found in cookie: ", token);
+    // console.log("Token found in cookie: ", token);
     email = getValueFromCookie('node-tutorial-email', request.headers.cookie);
     //console.log("Email found in cookie: ", email);
     async.whilst(
@@ -23,8 +24,8 @@ router.get('/', function(request, response, next) {
         },
         function (err, n) {
             // 5 seconds have passed, n = 5
-            
-            response.json(messages);
+            var result = baeFinder.determineBae(messages);
+            response.json(result);
            
         }
     ); 
@@ -61,7 +62,7 @@ function getMail(callback){
         else if (result) {
          
           result.value.forEach(function(message) {
-            messages.push(message);
+            messages.push(JSON.stringify(message));
           });
           callback();
         }
