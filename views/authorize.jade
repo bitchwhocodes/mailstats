@@ -9,9 +9,13 @@ block content
         div.baebackground
         div.baehead
   div.cta
-     h3=redirectlink
-     a(href=redirecturl) LOGIN FOR BAE
-
+     h3.status=redirectlink
+     a(href=redirecturl class=isAuthorized==true ? "hide" : "show") LOGIN FOR BAE
+     h3.result.hide Result is ....
+  audio.thugaudio(preload="auto")
+      source(src="../audio/thug.mp3",type="audio/mpeg")
+      
+     
   
 
     

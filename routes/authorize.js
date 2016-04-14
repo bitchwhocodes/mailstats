@@ -26,7 +26,7 @@ function tokenReceived(response, error, token) {
     var cookies = ['node-tutorial-token=' + token.token.access_token + ';Max-Age=3600',
                    'node-tutorial-email=' + authHelper.getEmailFromIdToken(token.token.id_token) + ';Max-Age=3600'];
     response.setHeader('Set-Cookie', cookies);
-    response.render('main',{});
+    response.render('authorize', {isAuthorized:true});
   }
 }
 

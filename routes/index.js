@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
       //TODO Replace this with a jade template
     console.log("Request handler 'home' was called.");
     var data ={};
+    data.isAuthorized=false;
     data.redirecturl =  auth.getAuthUrl();
     data.redirectlink = "Please sign in with your Office 365 or Outlook.com account";
     res.render('authorize', data);

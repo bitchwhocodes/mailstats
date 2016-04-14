@@ -16,6 +16,7 @@
     "morgan": "~1.6.1",
     "node-outlook": "^1.1.5",
     "serve-favicon": "~2.3.0",
-    "simple-oauth2": "^0.6.0"
+    "simple-oauth2": "^0.6.0",
+    "socket.io": "^1.4.5"
   }
 }
