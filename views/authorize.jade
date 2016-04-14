@@ -2,13 +2,20 @@ extends layout
 
 block content
 
+  div.main
+    h1.baetitle WHO IS YOUR WORK BAE
   div
-    h1 WHO IS YOUR WORK BAE
-    div.baebackground
-    div.baehead
-    
-  h1 Please Log in 
-  a(href=redirecturl)=redirectlink
+    div.centerbae
+        div.baebackground
+        div.baehead
+  div.cta
+     h3.status=redirectlink
+     a(href=redirecturl class=isAuthorized==true ? "hide" : "show") LOGIN FOR BAE
+     h3.result.hide Result is ....
+  audio.thugaudio(preload="auto")
+      source(src="../audio/thug.mp3",type="audio/mpeg")
+      
+     
   
 
     
