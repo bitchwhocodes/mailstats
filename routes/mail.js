@@ -25,7 +25,9 @@ router.get('/', function(request, response, next) {
         function (err, n) {
             // 5 seconds have passed, n = 5
             var result = baeFinder.determineBae(messages);
-            response.json(result);
+            console.log(result);
+            response.json({"result":result});
+            
            
         }
     ); 

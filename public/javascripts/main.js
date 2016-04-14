@@ -47,9 +47,10 @@ $(document).ready(function(){
   }
   
   function success(result){
-      console.log("Has the result");
-      $('.result').text = "Your Bae is: ";
-      $('.result').removeClass("hide").addClass("hide"); 
+      console.log("Has the result"+result.result);
+      console.log(result)
+      $('#result').text("Your Bae is: "+result.result);
+      $('#result').removeClass("hide").addClass("show"); 
   }
   
   function addAudioFile(){
