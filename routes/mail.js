@@ -12,7 +12,7 @@ router.get('/', function(request, response, next) {
     token = getValueFromCookie('node-tutorial-token', request.headers.cookie);
     console.log("Token found in cookie: ", token);
     email = getValueFromCookie('node-tutorial-email', request.headers.cookie);
-    console.log("Email found in cookie: ", email);
+    //console.log("Email found in cookie: ", email);
     async.whilst(
         function () { return count < 5; },
         function (callback) {
@@ -23,7 +23,7 @@ router.get('/', function(request, response, next) {
         },
         function (err, n) {
             // 5 seconds have passed, n = 5
-            console.log("done");
+            
             response.json(messages);
            
         }

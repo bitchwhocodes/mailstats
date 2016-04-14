@@ -1,8 +1,42 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "discourse-middle";
+  font-size:14px;
+
+  
+}
+html{
+ background-color:black;
+    height:100%;
+}
+
+h1{
+    color:#ffffff;
+    font-size:72px;
 }
 
 a {
   color: #00B7FF;
 }
+
+.baebackground{
+    background-image: url('../images/baebackground.png');
+    width:744px;
+    height:800px;
+    float:left;
+    display:block;
+    position:relative;
+}
+
+.baehead{
+    background-image: url('../images/baehead.png');
+    width:346px;
+    height:332px;
+    float:left;
+    display:block;
+    position: absolute;
+    top: 321px;
+    left: 237px;
+}
+
+
