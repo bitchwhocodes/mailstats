@@ -1,56 +1,34 @@
 var express = require('express');
 var router = express.Router();
 var url = require('url');
+var async = require('async');
 var outlook = require("node-outlook");
+var token,email;
+ var count = 0;
 var messages = [];
 
 router.get('/', function(request, response, next) {
-  var token = getValueFromCookie('node-tutorial-token', request.headers.cookie);
-  console.log("Token found in cookie: ", token);
-  var email = getValueFromCookie('node-tutorial-email', request.headers.cookie);
-  console.log("Email found in cookie: ", email);
-  if (token) {  
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write('<div><h1>Your inbox</h1></div>');
-    
-    var queryParams = {
-      '$select': 'Subject,ReceivedDateTime,From',
-      '$orderby': 'ReceivedDateTime desc',
-      '$top': 10
-    };
-    // Set the API endpoint to use the v2.0 endpoint
-    outlook.base.setApiEndpoint('https://outlook.office.com/api/v2.0');
-    // Set the anchor mailbox to the user's SMTP address
-    outlook.base.setAnchorMailbox(email);
+   
+    token = getValueFromCookie('node-tutorial-token', request.headers.cookie);
+    console.log("Token found in cookie: ", token);
+    email = getValueFromCookie('node-tutorial-email', request.headers.cookie);
+    console.log("Email found in cookie: ", email);
+    async.whilst(
+        function () { return count < 5; },
+        function (callback) {
+            console.log(count);
+           
+            getMail(callback);
+            count++;
+        },
+        function (err, n) {
+            // 5 seconds have passed, n = 5
+            console.log("done");
+            response.json(messages);
+           
+        }
+    ); 
 
-    outlook.mail.getMessages({token: token, odataParams: queryParams},
-      function(error, result){
-        if (error) {
-          console.log('getMessages returned an error: ' + error);
-          response.write("<p>ERROR: " + error + "</p>");
-          response.end();
-        }
-        else if (result) {
-          console.log('getMessages returned ' + result.value.length + ' messages.');
-          response.write('<table><tr><th>From</th><th>Subject</th><th>Received</th></tr>');
-          result.value.forEach(function(message) {
-            console.log('  Subject: ' + message.Subject);
-            var from = message.From ? message.From.EmailAddress.Name : "NONE";
-            response.write('<tr><td>' + from + 
-              '</td><td>' + message.Subject +
-              '</td><td>' + message.ReceivedDateTime.toString() + '</td></tr>');
-          });
-          
-          response.write('</table>');
-          response.end();
-        }
-      });
-  }
-  else {
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write('<p> No token found in cookie!</p>');
-    response.end();
-  }
 
 
 });
@@ -64,39 +42,33 @@ function getValueFromCookie(valueName, cookie) {
   }
 }
 
-function getMail(skip){
+
+
+function getMail(callback){
     
-    
+    var skip = count*100;
     var queryParams = {
-      '$select': 'Subject,ReceivedDateTime,From',
-      '$orderby': 'ReceivedDateTime desc',
       '$top': 100,
+      '$skip':skip
     };
     outlook.base.setAnchorMailbox(email);
     outlook.mail.getMessages({token: token, odataParams: queryParams},
       function(error, result){
         if (error) {
           console.log('getMessages returned an error: ' + error);
-          response.write("<p>ERROR: " + error + "</p>");
-          response.end();
+           callback(error);
         }
         else if (result) {
-          console.log('getMessages returned ' + result.value.length + ' messages.');
-          response.write('<table><tr><th>From</th><th>Subject</th><th>Received</th></tr>');
+         
           result.value.forEach(function(message) {
-            console.log('  Subject: ' + message.Subject);
-            var from = message.From ? message.From.EmailAddress.Name : "NONE";
-            response.write('<tr><td>' + from + 
-              '</td><td>' + message.Subject +
-              '</td><td>' + message.ReceivedDateTime.toString() + '</td></tr>');
+            messages.push(message);
           });
-          
-          response.write('</table>');
-          response.end();
+          callback();
         }
       });
     
 }
+
 
 module.exports = router;
 
